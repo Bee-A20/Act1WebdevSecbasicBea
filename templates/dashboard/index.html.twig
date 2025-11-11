@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/USER/Act1WebdevSecbasicBea/src/Controller/DashboardController.php</code></li>
-        <li>Your template at <code>C:/Users/USER/Act1WebdevSecbasicBea/templates/dashboard/index.html.twig</code></li>
-    </ul>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="message admin-message">
+            You are logged in as Admin. You have full access.
+        </div>
+    {% elseif is_granted('ROLE_USER') %}
+        <div class="message user-message">
+            You are logged in as Regular User. Limited access granted.
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
